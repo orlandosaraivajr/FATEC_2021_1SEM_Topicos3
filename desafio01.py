@@ -1,5 +1,5 @@
 lista = [('jhernandez', 'M', 72.83, 1.67, 'matriculado', ('40.81', '-73.9625')),
- ('ericaryan', 'M', 64.01, 1.37, ('37.60876', '-77.37331')),
+ ('ericaryan', 'm', 64.01, 1.37, ('37.60876', '-77.37331')),
  ('johnsonanna', 'F', 60.78, 1.28, ('40.72816', '-74.07764')),
  ('colliercurtis', 'M', 58.6, 1.38, ('36.20829', '-115.98391')),
  ('patrickhicks', 'M', 69.73, 1.15, ('42.93369', '-72.27814')),
@@ -338,15 +338,33 @@ lista = [('jhernandez', 'M', 72.83, 1.67, 'matriculado', ('40.81', '-73.9625')),
 # Armazenar na lista abaixo
 
 lista_sexo_m = []
-
+for elemento in lista:
+    if elemento[1] == 'm'.upper():
+        lista_sexo_m.append(elemento)
+        
 # Criar uma sublista, apenas com os registros cujo peso seja acima de 100.
 # Armazenar na lista abaixo
 
 lista_acima_100 = []
+for elemento in lista:
+    if elemento[2] > 100:
+        lista_acima_100.append(elemento)
 
 # Criar uma lista, apenas com os registros que sejam 'matriculado'.
 # Armazenar na lista abaixo
 
 lista_matriculados = []
+for elemento in lista:
+    try:
+        elemento.index('matriculado')
+        lista_matriculados.append(elemento)
+    except ValueError:
+        pass
 
 # Descobrir quais os registros comuns nas três listas
+set_acima_100 = set(lista_acima_100)
+set_sexo_m = set(lista_sexo_m) 
+set_matriculados = set(lista_matriculados)
+resultado = set_matriculados.intersection(set_acima_100).intersection(set_sexo_m) 
+resultado2 = set_matriculados.intersection(set_acima_100,set_sexo_m)
+resultado = list(resultado) 
