@@ -24,6 +24,7 @@ class IMC:
     def calculo(self):
         self.imc = round(self.peso / (self.altura*self.altura), 2)
 
+
 pessoa1 = IMC()
 pessoa2 = IMC(peso=80, altura=1.65)
 pessoa3 = IMC(altura=1.90, peso=70)
