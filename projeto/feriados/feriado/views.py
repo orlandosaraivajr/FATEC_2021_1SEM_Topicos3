@@ -1,4 +1,6 @@
 from django.shortcuts import render
 
 def natal(request):
-    return render(request, 'natal.html')
+    contexto = {'natal':False,
+                'carnaval':False}
+    return render(request, 'natal.html', contexto)
