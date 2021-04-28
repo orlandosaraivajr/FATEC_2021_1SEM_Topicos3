@@ -1,5 +1,6 @@
 from django.test import TestCase
 from feriado.models import FeriadoModel
+from feriado.forms import FeriadoForm
 from datetime import datetime
 
 class TestView_SemFeriado_Test(TestCase):
@@ -61,3 +62,29 @@ class FeriadoModelTest(TestCase):
     def test_nome_feriado(self):
         nome = self.cadastro.__dict__.get('nome', '')
         self.assertEqual(nome, self.feriado)
+
+
+class FeriadoFormTest(TestCase):
+    def test_form_has_fields(self):
+        form = FeriadoForm()
+        expected = ['nome', 'dia', 'mes']
+        self.assertSequenceEqual(expected, list(form.fields))
+
+    def test_must_be_capitalized(self):
+        form = self.make_validated_form(nome='dia de são nunca')
+        self.assertEqual('DIA DE SÃO NUNCA', form.cleaned_data['nome'])
+
+    def test_must_be_capitalized2(self):
+        form = self.make_validated_form()
+        self.assertEqual('TIRADENTES', form.cleaned_data['nome'])
+
+    def make_validated_form(self, **kwargs):
+        valid = dict(
+            nome='Tiradentes',
+            dia=14,
+            mes=4
+        )
+        data = dict(valid, **kwargs)
+        form = FeriadoForm(data)
+        form.is_valid()
+        return form
