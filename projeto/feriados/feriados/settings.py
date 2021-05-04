@@ -26,7 +26,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Apps locais
-    'feriado',
+    'feriado.apps.FeriadoConfig',
 ]
 
 MIDDLEWARE = [
